@@ -41,6 +41,10 @@ protected:
 	void Spell3();
 	void Spell4();
 	void InteractWith();
+	void SpellList();
+	void CloseSpellList();
+
+	bool bShowSpells;
 
 public:
 	ACyberMageCharacter();
@@ -53,6 +57,6 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character Stats")
 		float Health = 100;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character Stats")
-		float Mana = 40;
+		float Energy = 40;
 
 };

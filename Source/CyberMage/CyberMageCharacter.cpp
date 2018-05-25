@@ -41,7 +41,7 @@ ACyberMageCharacter::ACyberMageCharacter()
 	GetCharacterMovement()->GroundFriction = 3.f;
 	GetCharacterMovement()->MaxWalkSpeed = 600.f;
 	GetCharacterMovement()->MaxFlySpeed = 600.f;
-
+	
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 }
@@ -60,8 +60,10 @@ void ACyberMageCharacter::SetupPlayerInputComponent(class UInputComponent* Playe
 	PlayerInputComponent->BindAction("Spell1", IE_Pressed, this, &ACyberMageCharacter::Spell1);
 	PlayerInputComponent->BindAction("Spell2", IE_Pressed, this, &ACyberMageCharacter::Spell2);
 	PlayerInputComponent->BindAction("Spell3", IE_Pressed, this, &ACyberMageCharacter::Spell3);
-	PlayerInputComponent->BindAction("Spell4", IE_Pressed, this, &ACyberMageCharacter::Spell4);
+	//PlayerInputComponent->BindAction("Spell4", IE_Pressed, this, &ACyberMageCharacter::Spell4);
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACyberMageCharacter::InteractWith);
+	PlayerInputComponent->BindAction("SpellList", IE_Pressed, this, &ACyberMageCharacter::SpellList);
+	PlayerInputComponent->BindAction("SpellList", IE_Released, this, &ACyberMageCharacter::CloseSpellList);
 
 	PlayerInputComponent->BindAxis("MoveRight", this, &ACyberMageCharacter::MoveRight);
 
@@ -86,38 +88,86 @@ void ACyberMageCharacter::TouchStopped(const ETouchIndex::Type FingerIndex, cons
 	StopJumping();
 }
 
+void ACyberMageCharacter::SpellList()
+{
+	bShowSpells = true;
+}
+
+void ACyberMageCharacter::CloseSpellList()
+{
+	bShowSpells = false;
+}
+
 void ACyberMageCharacter::MeleeAttack()
 {
 	//Swing melee weapon
-	GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Red, "Melee Attack!");
+	if (!bShowSpells)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Red, "Melee Attack!");
+	}
 }
 
 void ACyberMageCharacter::RangeAttack()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Green, "Range Attack!");
+	if (!bShowSpells)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Green, "Range Attack!");
+	}
 }
 
 void ACyberMageCharacter::Spell1()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Blue, "Spell Attack 1!");
+	if (bShowSpells)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Blue, "Spell Attack 1!");
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Blue, "Spell Attack 1!");
+	}
 }
 
 void ACyberMageCharacter::Spell2()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Blue, "Spell Attack 2!");
+	if (bShowSpells)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Blue, "Spell Attack 2!");
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Blue, "Spell Attack 2!");
+	}
 }
 
 void ACyberMageCharacter::Spell3()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Blue, "Spell Attack 3!");
+
+	if (bShowSpells)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Blue, "Spell Attack 3!");
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Blue, "Spell Attack 3!");
+	}
 }
 
 void ACyberMageCharacter::Spell4()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Blue, "Spell Attack 4!");
+	if (bShowSpells)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Blue, "Spell Attack 4!");
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Blue, "Spell Attack 4!");
+	}
 }
 
 void ACyberMageCharacter::InteractWith()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Yellow, "Interact with object!");
+	if (!bShowSpells)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Yellow, "Interact with object!");
+	}
 }
