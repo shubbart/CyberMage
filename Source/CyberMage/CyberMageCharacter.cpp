@@ -6,6 +6,7 @@
 #include "Components/InputComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Engine.h"
 
 ACyberMageCharacter::ACyberMageCharacter()
 {
@@ -53,6 +54,15 @@ void ACyberMageCharacter::SetupPlayerInputComponent(class UInputComponent* Playe
 	// set up gameplay key bindings
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+
+	PlayerInputComponent->BindAction("MeleeAttack", IE_Pressed, this, &ACyberMageCharacter::MeleeAttack);
+	PlayerInputComponent->BindAction("RangeAttack", IE_Pressed, this, &ACyberMageCharacter::RangeAttack);
+	PlayerInputComponent->BindAction("Spell1", IE_Pressed, this, &ACyberMageCharacter::Spell1);
+	PlayerInputComponent->BindAction("Spell2", IE_Pressed, this, &ACyberMageCharacter::Spell2);
+	PlayerInputComponent->BindAction("Spell3", IE_Pressed, this, &ACyberMageCharacter::Spell3);
+	PlayerInputComponent->BindAction("Spell4", IE_Pressed, this, &ACyberMageCharacter::Spell4);
+	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACyberMageCharacter::InteractWith);
+
 	PlayerInputComponent->BindAxis("MoveRight", this, &ACyberMageCharacter::MoveRight);
 
 	PlayerInputComponent->BindTouch(IE_Pressed, this, &ACyberMageCharacter::TouchStarted);
@@ -76,3 +86,38 @@ void ACyberMageCharacter::TouchStopped(const ETouchIndex::Type FingerIndex, cons
 	StopJumping();
 }
 
+void ACyberMageCharacter::MeleeAttack()
+{
+	//Swing melee weapon
+	GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Red, "Melee Attack!");
+}
+
+void ACyberMageCharacter::RangeAttack()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Green, "Range Attack!");
+}
+
+void ACyberMageCharacter::Spell1()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Blue, "Spell Attack 1!");
+}
+
+void ACyberMageCharacter::Spell2()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Blue, "Spell Attack 2!");
+}
+
+void ACyberMageCharacter::Spell3()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Blue, "Spell Attack 3!");
+}
+
+void ACyberMageCharacter::Spell4()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Blue, "Spell Attack 4!");
+}
+
+void ACyberMageCharacter::InteractWith()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Yellow, "Interact with object!");
+}

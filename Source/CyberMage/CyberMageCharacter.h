@@ -34,6 +34,13 @@ protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 	// End of APawn interface
 
+	void MeleeAttack();
+	void RangeAttack();
+	void Spell1();
+	void Spell2();
+	void Spell3();
+	void Spell4();
+	void InteractWith();
 
 public:
 	ACyberMageCharacter();
@@ -42,4 +49,10 @@ public:
 	FORCEINLINE class UCameraComponent* GetSideViewCameraComponent() const { return SideViewCameraComponent; }
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character Stats")
+		float Health = 100;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character Stats")
+		float Mana = 40;
+
 };
