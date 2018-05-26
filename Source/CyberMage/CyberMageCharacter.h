@@ -6,6 +6,15 @@
 #include "GameFramework/Character.h"
 #include "CyberMageCharacter.generated.h"
 
+UENUM()
+enum CombatState
+{
+	NotAttacking,
+	Combo1,
+	Combo2,
+	Combo3
+};
+
 UCLASS(config=Game)
 class ACyberMageCharacter : public ACharacter
 {
@@ -58,5 +67,6 @@ public:
 		float Health = 100;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character Stats")
 		float Energy = 40;
-
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character Combat State")
+		int32 MeleeCombo = CombatState::NotAttacking;
 };

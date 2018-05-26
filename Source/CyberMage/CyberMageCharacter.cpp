@@ -104,6 +104,21 @@ void ACyberMageCharacter::MeleeAttack()
 	if (!bShowSpells)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Red, "Melee Attack!");
+		switch (MeleeCombo)
+		{
+		case CombatState::NotAttacking:
+				MeleeCombo = CombatState::Combo1;
+				GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Magenta, "Melee Combo 1!");
+				break;
+		case CombatState::Combo1:
+			MeleeCombo = CombatState::Combo2;
+			GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Magenta, "Melee Combo 2!");
+			break;
+		case CombatState::Combo2:
+			MeleeCombo = CombatState::Combo3;
+			GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Magenta, "Melee Combo 3!");
+			break;
+		}
 	}
 }
 
