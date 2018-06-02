@@ -42,6 +42,10 @@ ACyberMageCharacter::ACyberMageCharacter()
 	GetCharacterMovement()->MaxWalkSpeed = 600.f;
 	GetCharacterMovement()->MaxFlySpeed = 600.f;
 	
+
+	Health = 100;
+	Energy = 40;
+	bAttackPressed = false;
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 }
@@ -103,20 +107,28 @@ void ACyberMageCharacter::MeleeAttack()
 	//Swing melee weapon
 	if (!bShowSpells)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Red, "Melee Attack!");
 		switch (MeleeCombo)
 		{
 		case CombatState::NotAttacking:
+			if (!bAttackPressed)
+			{
 				MeleeCombo = CombatState::Combo1;
-				GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Magenta, "Melee Combo 1!");
-				break;
+				bAttackPressed = true;
+			}
+			break;
 		case CombatState::Combo1:
-			MeleeCombo = CombatState::Combo2;
-			GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Magenta, "Melee Combo 2!");
+			if (!bAttackPressed)
+			{
+				MeleeCombo = CombatState::Combo2;
+				bAttackPressed = true;
+			}
 			break;
 		case CombatState::Combo2:
-			MeleeCombo = CombatState::Combo3;
-			GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Magenta, "Melee Combo 3!");
+			if (!bAttackPressed)
+			{
+				MeleeCombo = CombatState::Combo3;
+				bAttackPressed = true;
+			}
 			break;
 		}
 	}

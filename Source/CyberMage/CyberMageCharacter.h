@@ -64,9 +64,12 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character Stats")
-		float Health = 100;
+		float Health;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character Stats")
-		float Energy = 40;
+		float Energy;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character Combat State")
 		int32 MeleeCombo = CombatState::NotAttacking;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Character Combat State")
+		bool bAttackPressed;
 };
